@@ -1,4 +1,5 @@
 const port = 4000;
+import new_collections from './../frontend/src/Components/Assets/new_collections';
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -197,6 +198,15 @@ app.post('/login', async (req,res)=>{
   else{
     res.json({success:false, errors:"Wrong email id"});
   }
+})
+
+//creating endpoint for newcollection data
+app.get('/newcollections', async (req, res)=>{
+  let products = await Product.find({});
+  let newcollection = products.slice(1).slice(-8);
+  console.log("NewCollection Fetched");
+  res.send(newcollection);
+
 })
 
 
